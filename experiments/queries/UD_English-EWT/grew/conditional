@@ -1,0 +1,5 @@
+pattern {
+    X -[advcl]-> Y;
+    Y -[mark]-> M;
+    M [form="if"];
+}

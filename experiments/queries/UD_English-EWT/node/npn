@@ -1,0 +1,14 @@
+MATCH (N:Word)-[:XPOS]->(Nxpos)
+MATCH (N2:Word)-[:XPOS]->(N2xpos)
+MATCH (N)-[:LEMMA]->()<-[:LEMMA]-(N2)
+MATCH (N)-[:DEPREL]->(N2)
+MATCH (N2)-[:DEPREL {deprel: 'case'}]->(P)
+MATCH (N)-[:SENTENCE_SUCCESSOR]->(P)
+MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+WHERE Nxpos.value =~ "N.*" AND N2xpos.value =~ "N.*"
+AND NOT EXISTS {
+    MATCH (N)-[:DEPREL {deprel: 'case'}]->(P2)
+    MATCH (P2)-[:SENTENCE_SUCCESSOR]->(N)
+    MATCH (P2:Word)-[:LEMMA]->(:Lemma {value: 'from'})
+}
+RETURN N, N2, P

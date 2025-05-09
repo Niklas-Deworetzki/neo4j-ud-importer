@@ -1,0 +1,8 @@
+MATCH (YOU:Word)
+MATCH (OBJ:Word)
+MATCH (YOU)-[:FORM]->(:Form {value: "有"})
+MATCH (YOU)-[:DEPREL {deprel: 'obj'}]->(OBJ)
+WHERE NOT EXISTS {
+    MATCH (YOU)-[:DEPREL {deprel: 'nsubj'}]->(:Word)
+}
+RETURN YOU, OBJ

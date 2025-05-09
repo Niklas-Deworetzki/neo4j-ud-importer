@@ -1,5 +1,9 @@
 /*
 !queries/
 !results/
+!grew-docker/
+!grew-data/
 !neo4jud.jar
 !*.py
+!Makefile
+!Dockerfile

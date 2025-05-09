@@ -1,0 +1,5 @@
+pattern {
+    PAR -[re"root\|ccomp"]-> GOV;
+    PINT[xpos="PINT"];
+    GOV -> PINT;
+}

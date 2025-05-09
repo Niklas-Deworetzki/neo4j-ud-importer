@@ -1,0 +1,4 @@
+pattern {
+    N1[lemma="haver"|"existir"];
+    N1-[obj]->N2
+}

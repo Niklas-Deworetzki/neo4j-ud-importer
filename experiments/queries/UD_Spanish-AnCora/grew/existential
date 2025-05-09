@@ -1,0 +1,7 @@
+pattern {
+    N1[lemma="haber"];
+    N1-[obj]->N2;
+    N2[upos=NOUN];
+    N2-[det]->N3;
+    N3[upos=DET, Definite=Ind];
+}

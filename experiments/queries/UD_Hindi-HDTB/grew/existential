@@ -1,0 +1,5 @@
+pattern {
+    W1 [lemma="है", upos="AUX"];
+    W2 [upos <> ADJ|ADJ-DET|DET];
+    W2 -[cop]-> W1;
+}

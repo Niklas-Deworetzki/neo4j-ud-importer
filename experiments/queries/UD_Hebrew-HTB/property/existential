@@ -1,0 +1,12 @@
+MATCH (THERE:Word)
+MATCH (SUBJ:Word)
+MATCH (THERE {lemma: "יש"})
+MATCH (THERE)-[:DEPREL {deprel: "nsubj"}]->(SUBJ)
+WHERE NOT EXISTS {
+    MATCH (N:Word)
+    MATCH (LE:Word)
+    MATCH (THERE)-[:DEPREL {deprel: "obl"}]->(N)
+    MATCH (LE {lemma: "ל"})
+    MATCH (N)-[:DEPREL {deprel: "case"}]->(LE)
+}
+RETURN THERE, SUBJ

@@ -1,0 +1,7 @@
+{
+	"port": 8100,
+	"prefix": "grew_match",
+	"corpusbank": "/home/grewmatch/corpusbank",
+	"log": "/home/grewmatch/grew_match_dream/log",
+	"storage": "/home/grewmatch/grew_match_dream/static"
+}

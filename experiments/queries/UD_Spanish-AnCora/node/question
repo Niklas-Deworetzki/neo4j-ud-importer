@@ -1,0 +1,11 @@
+MATCH (P:Word)
+MATCH (H:Word)
+MATCH (P)-[:LEMMA]->(:Lemma {value: '?'})
+MATCH (H)-[:DEPREL]->(P)
+MATCH (X:Word)
+MATCH (X)-[:DEPREL]-+(P)
+MATCH (X)-[:PRON_TYPE]->(xprontype:PronType)
+MATCH (H)-[:UPOS]->(hupos:Upos)
+WHERE hupos.value <> "PUNCT"
+AND xprontype.value in ["Int", "Int,Rel"]
+RETURN P, H

@@ -1,0 +1,10 @@
+MATCH (V:Word)
+MATCH (Q:Word)
+MATCH (W:Word)
+MATCH (V:Root)
+MATCH (V)-[:DEPREL {deprel: 'punct'}]->(Q)
+MATCH (Q)-[:FORM]->(:Form {value: '?'})
+MATCH (V)-[:DEPREL]->(W)
+MATCH (W)-[:LEMMA]->(WLemma:Lemma)
+WHERE WLemma.value in ["who","what","when","how","why","which","whose","whom","where"]
+RETURN V, Q, W

@@ -1,0 +1,7 @@
+pattern {
+  R-[root]->V;
+  V-[punct]-> Q;
+  Q [form="?"];
+  V -> W;
+  W [lemma = "vem"|"vad"|"vilken"|"var"|"när"|"hur"|"varför"]
+}

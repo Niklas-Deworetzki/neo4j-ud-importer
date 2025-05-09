@@ -1,0 +1,5 @@
+pattern {
+    N1[lemma="y"];
+    N2 [lemma="avoir"];
+    N2-[expl:comp]->N1
+}

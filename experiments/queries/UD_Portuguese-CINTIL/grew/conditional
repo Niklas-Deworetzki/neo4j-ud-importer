@@ -1,0 +1,5 @@
+pattern {
+    SE [form="se"|"caso", upos=SCONJ];
+    CL1 -[mark]-> SE;
+    CL2 -[advcl]-> CL1;
+}

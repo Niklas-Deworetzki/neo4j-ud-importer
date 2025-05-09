@@ -1,0 +1,8 @@
+MATCH (A:Word)
+MATCH (X:Word)
+MATCH (H:Word)
+MATCH (A {lemma: 'si'})
+MATCH (X)-[:DEPREL {deprel: 'mark'}]->(A)
+MATCH (H)-[r:DEPREL]->(X)
+WHERE r.deprel in ['advcl', 'advmod']
+RETURN A, X, H

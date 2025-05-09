@@ -1,0 +1,10 @@
+MATCH (X:Word)
+MATCH (P:Word)
+MATCH (X)-[:DEPREL]->(P)
+MATCH (P {PronType: 'Int'})
+WHERE NOT EXISTS {
+    MATCH (PUNCT:Word)
+    MATCH (X)-[:DEPREL]-+(PUNCT)
+    MATCH (PUNCT {lemma: '?'})
+}
+RETURN X, P

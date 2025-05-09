@@ -1,0 +1,15 @@
+pattern {
+  N [ xpos = re"N.*" ];
+  N2 [xpos = re"N.*" ];
+  N.lemma = N2.lemma;
+  N -> N2;
+  N2 -[case]-> P;
+  N < P;
+  P < N2;
+}
+
+
+without {
+    N -[case]-> P2;
+    P2 << N
+}

@@ -1,0 +1,10 @@
+pattern {
+    IF [lemma=re"אם\|אילו\|לו"];
+    MAIN -[advcl]-> COND;
+    COND -[mark]-> IF
+}
+
+without {
+    KI [lemma="כי"];
+    IF < KI
+}

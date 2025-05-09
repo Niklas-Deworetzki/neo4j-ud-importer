@@ -1,0 +1,9 @@
+MATCH (SE:Word)
+MATCH (CL1:Word)
+MATCH (CL2:Word)
+MATCH (SE)-[:UPOS]->(:Upos {value: "SCONJ"})
+MATCH (SE)-[:FORM]->(seform:Form)
+MATCH (CL1)-[:DEPREL {deprel: 'mark'}]->(SE)
+MATCH (CL2)-[:DEPREL {deprel: 'advcl'}]->(CL1)
+WHERE seform.value in ["se", "caso"]
+RETURN SE, CL1, CL2

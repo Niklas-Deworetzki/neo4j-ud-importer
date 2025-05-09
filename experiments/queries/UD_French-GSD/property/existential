@@ -1,0 +1,6 @@
+MATCH (N1:Word)
+MATCH (N2:Word)
+MATCH (N1 {lemma: 'y'})
+MATCH (N2 {lemma: 'avoir'})
+MATCH (N2)-[:DEPREL {deprel: 'expl:comp'}]->(N1)
+RETURN N1, N2

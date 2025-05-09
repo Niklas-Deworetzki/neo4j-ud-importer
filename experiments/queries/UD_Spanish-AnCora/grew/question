@@ -1,0 +1,12 @@
+pattern {
+    P[lemma="?"];
+    H->P;
+}
+
+without {
+    H[upos=PUNCT]
+}
+
+with {
+    X[PronType=Int|"Int,Rel"]
+}

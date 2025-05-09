@@ -1,0 +1,4 @@
+pattern {
+    E [lemma="finnas"|"existera"];
+    E -[re".subj"]-> X;
+}

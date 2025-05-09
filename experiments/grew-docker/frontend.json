@@ -1,0 +1,11 @@
+{
+	"backend": "http://localhost:8100/",
+	"desc": [
+		{
+			"id": "corpora",
+			"mode": "syntax",
+			"style": "dropdown",
+			"corpora": []
+		}
+	]
+}

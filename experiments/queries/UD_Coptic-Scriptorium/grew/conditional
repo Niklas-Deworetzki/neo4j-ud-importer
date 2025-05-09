@@ -1,0 +1,12 @@
+pattern {
+    MAIN -[advcl]-> ADVCL;
+    CONJ [ xpos=re"ACOND.*"];
+    ADVCL -> CONJ;
+}
+
+without {
+    AUX [xpos=FUT];
+    PRET [xpos=CPRET];
+    MAIN -> AUX;
+    MAIN -> PRET;
+}

@@ -1,0 +1,16 @@
+MATCH (MAIN:Word)
+MATCH (CONJ:Word)
+MATCH (ADVCL:Word)
+MATCH (CONJ)-[:XPOS]->(conjxpos:Xpos)
+MATCH (MAIN)-[:DEPREL {deprel: 'advcl'}]->(ADVCL)
+MATCH (ADVCL)-[:DEPREL]->(CONJ)
+WHERE conjxpos.value =~ "ACOND.*"
+AND NOT EXISTS {
+    MATCH (AUX:Word)
+    MATCH (PRET:Word)
+    MATCH (AUX)-[:XPOS]->(:Xpos {value: "FUT"})
+    MATCH (PRET)-[:XPOS]->(:Xpos {value: "CPRET"})
+    MATCH (MAIN)-[:DEPREL]->(AUX)
+    MATCH (MAIN)-[:DEPREL]->(PRET)
+}
+RETURN MAIN, CONJ, ADVCL

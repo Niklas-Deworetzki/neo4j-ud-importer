@@ -1,0 +1,13 @@
+pattern {
+    N1[upos=NOUN];
+    N2[upos=NOUN];
+    N1.form = N2.form;
+    P[upos=ADP];
+    N1 < P;
+    P < N2;
+}
+
+without{
+    A[upos=ADP];
+    A < N1;
+}

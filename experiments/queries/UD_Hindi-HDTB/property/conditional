@@ -1,0 +1,11 @@
+MATCH (N:Word)
+MATCH (T:Word)
+MATCH (T {form: "तो"})
+MATCH (T)-[:DEPREL]-+(N)
+WHERE N.form in ["अगर","यदि"]
+AND NOT EXISTS {
+    MATCH (V1:Word)
+    MATCH (V1)-[:DEPREL]-+(N)
+    MATCH (V1 {upos: 'VERB', Mood: 'Sub'})
+}
+RETURN N, T

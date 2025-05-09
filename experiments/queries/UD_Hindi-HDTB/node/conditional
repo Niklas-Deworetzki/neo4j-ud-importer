@@ -1,0 +1,13 @@
+MATCH (N:Word)
+MATCH (T:Word)
+MATCH (T)-[:FORM]->(:Form {value: "तो"})
+MATCH (T)-[:DEPREL]-+(N)
+MATCH (N)-[:FORM]->(nform:Form)
+WHERE nform.value in ["अगर","यदि"]
+AND NOT EXISTS {
+    MATCH (V1:Word)
+    MATCH (V1)-[:DEPREL]-+(N)
+    MATCH (V1)-[:UPOS]->(:Upos {value: 'VERB'})
+    MATCH (V1)-[:MOOD]->(:Mood {value: 'Sub'})
+}
+RETURN N, T

@@ -1,0 +1,21 @@
+MATCH (N1:Word)
+MATCH (N2:Word)
+MATCH (P:Word)
+MATCH (noun:Upos {value: 'NOUN'})
+MATCH (N1)-[:UPOS]->(noun)
+MATCH (P)-[:UPOS]->(:Upos {value: 'ADP'})
+MATCH (N2)-[:UPOS]->(noun)
+MATCH (N1)-[:SENTENCE_SUCCESSOR]->(P)
+MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+WHERE (N1)-[:LEMMA]->(:Lemma)<-[:LEMMA]-(N2)
+AND NOT EXISTS {
+    MATCH (X:Word)
+    MATCH (N1)-[:DEPREL {deprel: 'case'}]->(X)
+    MATCH (X)-[:SENTENCE_SUCCESSOR]->*(N1)
+}
+AND NOT EXISTS {
+    MATCH (A:Word)
+    MATCH (A)-[:UPOS]->(:Upos {value: 'ADP'})
+    MATCH (A)-[:DEPREL]->(N1)
+}
+RETURN N1, N2, P

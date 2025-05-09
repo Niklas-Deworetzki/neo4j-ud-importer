@@ -1,0 +1,9 @@
+MATCH (P:Word)
+MATCH (H:Word)
+MATCH (P {lemma: '?'})
+MATCH (H)-[:DEPREL]->(P)
+MATCH (X:Word)
+MATCH (X)-[:DEPREL]-+(P)
+WHERE H.upos <> "PUNCT"
+AND X.PronType in ["Int", "Int,Rel"]
+RETURN P, H

@@ -1,0 +1,4 @@
+MATCH (P:Word)
+MATCH (P)-[:LEMMA]->(plemma:Lemma)
+WHERE plemma.value in ["如果","假如","假設","假使","倘若","倘使"]
+RETURN P

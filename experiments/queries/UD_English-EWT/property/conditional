@@ -1,0 +1,7 @@
+MATCH (X:Word)
+MATCH (Y:Word)
+MATCH (M:Word)
+MATCH (X)-[:DEPREL {deprel: 'advcl'}]->(Y)
+MATCH (Y)-[:DEPREL {deprel: 'mark'}]->(M)
+MATCH (M {form: 'if'})
+RETURN X, Y, M

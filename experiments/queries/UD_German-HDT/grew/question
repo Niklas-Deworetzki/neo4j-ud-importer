@@ -1,0 +1,5 @@
+pattern {
+    F[lemma="?", upos=PUNCT];
+    W[PronType="Int,Rel"|"Int"];
+    W << F;
+}

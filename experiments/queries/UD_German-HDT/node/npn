@@ -1,0 +1,16 @@
+MATCH (N1:Word)
+MATCH (N2:Word)
+MATCH (P:Word)
+MATCH (noun:Upos {value: 'NOUN'})
+MATCH (N1)-[:UPOS]->(noun)
+MATCH (N2)-[:UPOS]->(noun)
+MATCH (P)-[:UPOS]->(:Upos {value: 'ADP'})
+MATCH (N1)-[:FORM]->(:Form)<-[:FORM]-(N2)
+MATCH (N1)-[:SENTENCE_SUCCESSOR]->(P)
+MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+WHERE NOT EXISTS {
+    MATCH (A:Word)
+    MATCH (A)-[:UPOS]->(:Upos {value: 'ADP'})
+    MATCH (A)-[:SENTENCE_SUCCESSOR]->(N1)
+}
+RETURN N1, N2, P

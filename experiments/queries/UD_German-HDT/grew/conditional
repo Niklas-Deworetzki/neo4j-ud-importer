@@ -1,0 +1,9 @@
+pattern {
+    X[form="angenommen"|"vorausgesetzt"|"unterstellt"];
+    Y1[form<>"dass"|"daß"];
+    Y2[form<>"dass"|"daß"];
+    A[lemma=","];
+    A < X;
+    X < Y1;
+    Y1 < Y2;
+}

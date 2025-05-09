@@ -1,0 +1,6 @@
+MATCH (QU:Word)
+MATCH (I:Word)
+MATCH (QU)-[:PRON_TYPE]->(:PronType {value: "Int"})
+MATCH (I)-[:LEMMA]->(:Lemma {value: "?"})
+MATCH (QU)-[:DEPREL]-+(I)
+RETURN QU, I

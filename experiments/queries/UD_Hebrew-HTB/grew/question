@@ -1,0 +1,12 @@
+pattern {
+    MI [lemma=re"מי\|מה", upos=ADV];
+    V -[nsubj]-> MI
+}
+
+without {
+    MI -[acl:relcl]-> RC
+}
+
+without {
+    X [form="?"]
+}

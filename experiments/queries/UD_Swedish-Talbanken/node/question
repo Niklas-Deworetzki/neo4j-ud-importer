@@ -1,0 +1,9 @@
+MATCH (V:Word:Root)
+MATCH (Q:Word)
+MATCH (W:Word)
+MATCH (V)-[:DEPREL {deprel: 'punct'}]->(Q)
+MATCH (Q)-[:FORM]->(:Form {value: '?'})
+MATCH (V)-[:DEPREL]->(W)
+MATCH (W)-[:LEMMA]->(wlemma:Lemma)
+WHERE wlemma.value IN ["vem","vad","vilken","var","när","hur","varför"]
+RETURN V, Q, W

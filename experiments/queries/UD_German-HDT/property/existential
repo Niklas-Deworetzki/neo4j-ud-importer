@@ -1,0 +1,6 @@
+MATCH (E:Word)
+MATCH (G:Word)
+MATCH (E {lemma: 'es'})
+MATCH (G {lemma: 'geben'})
+MATCH (G)-[:DEPREL {deprel: 'nsubj'}]->(E)
+RETURN E, G

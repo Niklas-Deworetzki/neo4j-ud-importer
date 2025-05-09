@@ -1,0 +1,8 @@
+pattern {
+    YOU [form="有"];
+    YOU-[obj]-> OBJ
+}
+
+without {
+    YOU-[nsubj]->SUBJ
+}

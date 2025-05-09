@@ -1,0 +1,13 @@
+pattern {
+  W [lemma="क्या"|"कौन"|"कहाँ"|"कहां"|"कब"|"कैसे"|"कितना"|"किस"];
+}
+
+without {
+    SC [form="कि"];
+    V -[mark]-> SC
+}
+
+without {
+    V1 [upos=VERB];
+    V1 -[advcl]-> V;
+}

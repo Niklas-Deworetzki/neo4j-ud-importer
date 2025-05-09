@@ -1,0 +1,7 @@
+MATCH (V1:Word)
+MATCH (V2:Word)
+MATCH (S:Word)
+MATCH (V1)-[:DEPREL {deprel: 'advcl'}]->(V2)
+MATCH (V2)-[:DEPREL {deprel: 'mark'}]->(S)
+MATCH (S {lemma:'si', upos:'SCONJ'})
+RETURN V1, V2, S

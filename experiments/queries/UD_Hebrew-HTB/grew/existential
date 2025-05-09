@@ -1,0 +1,10 @@
+pattern {
+    THERE [lemma="יש"];
+    THERE -[nsubj]->SUBJ
+}
+
+without {
+    THERE-[obl]->N;
+    LE[lemma="ל"];
+    N -[case]->LE
+}

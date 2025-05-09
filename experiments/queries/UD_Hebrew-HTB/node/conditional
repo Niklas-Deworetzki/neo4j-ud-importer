@@ -1,0 +1,13 @@
+MATCH (I:Word)
+MATCH (MAIN:Word)
+MATCH (COND:Word)
+MATCH (MAIN)-[:DEPREL {deprel: "advcl"}]->(COND)
+MATCH (COND)-[:DEPREL {deprel: "mark"}]->(I)
+MATCH (I)-[:LEMMA]->(ilemma:Lemma)
+WHERE ilemma.value IN ["אם", "אילו", "לו"]
+AND NOT EXISTS {
+    MATCH (KI:Word)
+    MATCH (KI)-[:LEMMA]->(:Lemma {value: "כי"})
+    MATCH (I)-[:SENTENCE_SUCCESSOR]->(KI)
+}
+RETURN I, MAIN, COND

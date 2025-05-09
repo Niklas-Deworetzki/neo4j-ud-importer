@@ -1,0 +1,9 @@
+MATCH (E:Word)
+MATCH (X:Word)
+MATCH (Y:Word)
+MATCH (E)-[r:DEPREL]->(X)
+MATCH (E)-[:DEPREL]->(Y)
+MATCH (Y {xpos: 'EX'})
+WHERE r.deprel =~ '.subj'
+AND E.lemma in ['be', 'exist', 'stretch']
+RETURN E, X, Y

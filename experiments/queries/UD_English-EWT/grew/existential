@@ -1,0 +1,6 @@
+pattern {
+    E [lemma="be"|"exist"|"stretch"];
+    E -[re".subj"]-> X;
+    E -> Y;
+    Y [xpos="EX"];
+}

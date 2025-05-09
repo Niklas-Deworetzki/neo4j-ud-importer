@@ -1,0 +1,8 @@
+pattern {
+    N1 [upos=NOUN];
+    P [upos=ADP];
+    N2 [upos=NOUN];
+    N1 < P;
+    P < N2;
+    N1.form = N2.form
+}

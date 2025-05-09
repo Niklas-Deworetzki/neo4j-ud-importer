@@ -1,0 +1,10 @@
+MATCH (N1:Word)
+MATCH (P:Word)
+MATCH (N2:Word)
+MATCH (N1 {upos: 'NOUN'})
+MATCH (N2 {upos: 'NOUN'})
+MATCH (P {upos: 'ADP'})
+MATCH (N1)-[:SENTENCE_SUCCESSOR]->(P)
+MATCH (N2)<-[:SENTENCE_SUCCESSOR]-(P)
+WHERE N1.form = N2.form
+RETURN N1, N2, P

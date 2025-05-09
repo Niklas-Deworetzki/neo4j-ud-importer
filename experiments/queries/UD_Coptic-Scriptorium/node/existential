@@ -1,0 +1,6 @@
+MATCH (EX:Word)
+MATCH (SBJ:Word)
+MATCH (EX)-[:LEMMA]->(:Lemma {value: "ⲟⲩⲛ"})
+MATCH (EX)-[:XPOS]->(:Xpos {value: "EXIST"})
+MATCH (EX)-[:DEPREL {deprel: "nsubj"}]->(SBJ)
+RETURN EX, SBJ

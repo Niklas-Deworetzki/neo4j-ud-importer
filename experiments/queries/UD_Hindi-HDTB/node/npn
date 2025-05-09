@@ -1,0 +1,11 @@
+MATCH (W1:Word)
+MATCH (W2:Word)
+MATCH (P:Word)
+MATCH (noun:Upos {value: 'NOUN'})
+MATCH (W1)-[:UPOS]->(noun)
+MATCH (W2)-[:UPOS]->(noun)
+MATCH (P)-[:UPOS]->(:Upos {value: 'ADP'})
+MATCH (W1)-[:DEPREL]->(P)
+MATCH (W1)-[:DEPREL {deprel: 'compound'}]->(W2)
+MATCH (W1)-[:LEMMA]->(:Lemma)<-[:LEMMA]-(W2)
+RETURN W1, W2, P

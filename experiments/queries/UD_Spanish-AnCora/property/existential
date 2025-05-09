@@ -1,0 +1,9 @@
+MATCH (N1:Word)
+MATCH (N2:Word)
+MATCH (N3:Word)
+MATCH (N1 {lemma: 'haber'})
+MATCH (N1)-[:DEPREL {deprel: 'obj'}]->(N2)
+MATCH (N2 {upos: 'NOUN'})
+MATCH (N2)-[:DEPREL {deprel: 'det'}]->(N3)
+MATCH (N3 {upos:'DET', Definite: 'Ind'})
+RETURN N1, N2, N3

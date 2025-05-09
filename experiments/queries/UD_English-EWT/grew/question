@@ -1,0 +1,7 @@
+pattern {
+  R-[root]->V;
+  V-[punct]-> Q;
+  Q [form="?"];
+  V -> W;
+  W [lemma = "who"|"what"|"when"|"how"|"why"|"which"|"whose"|"whom"|"where"]
+}

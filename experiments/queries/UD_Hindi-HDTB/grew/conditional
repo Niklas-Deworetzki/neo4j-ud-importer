@@ -1,0 +1,8 @@
+pattern {
+    N [form="अगर"|"यदि"];
+    T [form="तो"];
+}
+
+without {
+    V1 [upos="VERB", Mood="Sub"]
+}

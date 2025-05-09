@@ -1,0 +1,19 @@
+MATCH (N1:Word)
+MATCH (N2:Word)
+MATCH (P:Word)
+MATCH (N1 {upos: 'NOUN'})
+MATCH (N2 {upos: 'NOUN'})
+MATCH (P {upos: 'ADP'})
+MATCH (N1)-[:SENTENCE_SUCCESSOR]->(P)
+MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+WHERE N1.form = N2.form
+AND P.form <> "של"
+AND NOT EXISTS {
+    MATCH (C1:Word)
+    MATCH (C1)-[:DEPREL {deprel: "compound:smixut"}]->(N1)
+}
+AND NOT EXISTS {
+    MATCH (C2:Word)
+    MATCH (N2)-[:DEPREL {deprel: "compound:smixut"}]->(C2)
+}
+RETURN N1, N2, P

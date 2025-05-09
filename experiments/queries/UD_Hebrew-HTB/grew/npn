@@ -1,0 +1,16 @@
+pattern {
+    N1[upos=NOUN];
+    N2[upos=NOUN];
+    N1.form = N2.form;
+    P[upos=ADP,form<>"של"];
+    N1 < P;
+    P < N2;
+}
+
+without {
+    C1-[compound:smixut]->N1
+}
+
+without {
+    N2-[compound:smixut]->C2
+}

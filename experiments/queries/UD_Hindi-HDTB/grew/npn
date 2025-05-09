@@ -1,0 +1,8 @@
+pattern {
+    W1 [upos="NOUN"];
+    W2 [upos="NOUN"];
+    W1.lemma = W2.lemma;
+    P [upos=ADP];
+    W1 -> P;
+    W1 -[compound]-> W2
+}

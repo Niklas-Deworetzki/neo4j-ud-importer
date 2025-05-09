@@ -1,0 +1,8 @@
+pattern {
+    X->P;
+    P[PronType=Int];
+}
+
+without {
+    PUNCT[lemma="?"]
+}

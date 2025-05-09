@@ -1,0 +1,8 @@
+MATCH (W1:Word)
+MATCH (W2:Word)
+MATCH (W1)-[:LEMMA]->(:Lemma {value: "है"})
+MATCH (W1)-[:UPOS]->(:Upos {value: "AUX"})
+MATCH (W2)-[:DEPREL {deprel: 'cop'}]->(W1)
+MATCH (W2)-[:UPOS]->(w2upos:Upos)
+WHERE NOT w2upos.value IN ["ADJ", "ADJ-DET", "DET"]
+RETURN W1, W2

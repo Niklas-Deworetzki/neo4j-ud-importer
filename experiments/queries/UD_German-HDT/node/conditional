@@ -1,0 +1,15 @@
+MATCH (X:Word)
+MATCH (Y1:Word)
+MATCH (Y2:Word)
+MATCH (A:Word)
+MATCH (X)-[:FORM]->(XForm:Form)
+MATCH (Y1)-[:FORM]->(Y1Form:Form)
+MATCH (Y2)-[:FORM]->(Y2Form:Form)
+MATCH (A)-[:LEMMA]->(:Lemma {value: ','})
+MATCH (A)-[:SENTENCE_SUCCESSOR]->(X)
+MATCH (X)-[:SENTENCE_SUCCESSOR]->(Y1)
+MATCH (Y1)-[:SENTENCE_SUCCESSOR]->(Y2)
+WHERE XForm.value in ['angenommen', 'vorausgesetzt', 'unterstellt']
+AND not Y1Form.value in ['dass', 'daß']
+AND not Y2Form.value in ['dass', 'daß']
+RETURN X, Y1, Y2, A

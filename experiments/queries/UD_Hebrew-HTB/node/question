@@ -1,0 +1,16 @@
+MATCH (MI:Word)
+MATCH (V:Word)
+MATCH (MI)-[:UPOS]->(:Upos {value: "ADV"})
+MATCH (MI)-[:LEMMA]->(milemma:Lemma)
+MATCH (V)-[:DEPREL {deprel: "nsubj"}]->(MI)
+WHERE milemma.value IN ["מי", "מה"]
+AND NOT EXISTS {
+    MATCH (RC:Word)
+    MATCH (MI)-[:DEPREL {deprel: "acl:relcl"}]->(RC)
+}
+AND NOT EXISTS {
+    MATCH (X:Word)
+    MATCH (X)-[:DEPREL]-+(MI)
+    MATCH (X)-[:FORM]->(:Form {value: "?"})
+}
+RETURN MI, V

@@ -1,0 +1,6 @@
+MATCH (E:Word)
+MATCH (X:Word)
+MATCH (E)-[r:DEPREL]->(X)
+WHERE E.LEMMA IN ["finnas", "existera"]
+AND r.deprel =~ ".subj"
+RETURN E, X

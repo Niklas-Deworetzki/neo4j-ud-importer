@@ -1,0 +1,10 @@
+MATCH (GOV:Word)
+MATCH (PINT:Word)
+MATCH (PINT)-[:XPOS]->(:Xpos {value: "PINT"})
+MATCH (GOV)-[:DEPREL]->(PINT)
+WHERE EXISTS {
+    MATCH (GOV:Root)
+} OR EXISTS {
+    MATCH ()-[:DEPREL {deprel: "ccomp"}]->(GOV)
+}
+RETURN GOV, PINT

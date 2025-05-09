@@ -1,0 +1,5 @@
+pattern {
+    E[lemma="es"];
+    G[lemma="geben"];
+    G-[nsubj]->E;
+}

@@ -1,0 +1,5 @@
+pattern {
+    V1-[advcl]->V2;
+    V2 -[mark]-> S;
+    S[lemma=si, upos=SCONJ]
+}

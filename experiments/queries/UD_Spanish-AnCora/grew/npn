@@ -1,0 +1,18 @@
+pattern {
+    N1[upos=NOUN];
+    P[upos=ADP];
+    N2[upos=NOUN];
+    N1 < P;
+    P < N2 ;
+    N1.lemma = N2.lemma;
+}
+
+without {
+    N1-[case]->X;
+    X << N1
+}
+
+without {
+    A[upos=ADP];
+    A->N1
+}

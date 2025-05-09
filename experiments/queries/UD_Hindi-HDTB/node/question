@@ -1,0 +1,20 @@
+MATCH (W:Word)
+MATCH (W)-[:LEMMA]->(wlemma:Lemma)
+WHERE wlemma.value in ["क्या","कौन","कहाँ","कहां","कब","कैसे","कितना","किस"]
+AND NOT EXISTS {
+    MATCH (SC:Word)
+    MATCH (V:Word)
+    MATCH (SC)-[:DEPREL]-+(W)
+    MATCH (V)-[:DEPREL]-+(W)
+    MATCH (SC)-[:FORM]->(:Form {value: "कि"})
+    MATCH (V)-[:DEPREL {deprel: 'mark'}]->(SC)
+}
+AND NOT EXISTS {
+    MATCH (V1:Word)
+    MATCH (V:Word)
+    MATCH (V1)-[:DEPREL]-+(W)
+    MATCH (V)-[:DEPREL]-+(W)
+    MATCH (V1)-[:UPOS]->(:Upos {value: "VERB"})
+    MATCH (V1)-[:DEPREL {deprel: 'advcl'}]->(V)
+}
+RETURN W

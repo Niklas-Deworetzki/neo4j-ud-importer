@@ -1,0 +1,5 @@
+MATCH (N1:Word)
+MATCH (N2:Word)
+MATCH (N1)-[:DEPREL {deprel: 'obj'}]->(N2)
+WHERE N1.lemma in ["haver", "existir"]
+RETURN N1, N2

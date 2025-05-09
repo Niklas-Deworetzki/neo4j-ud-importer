@@ -1,0 +1,4 @@
+pattern {
+    EXIST [lemma="ⲟⲩⲛ",xpos=EXIST];
+    EXIST -[nsubj]-> SBJ;
+}

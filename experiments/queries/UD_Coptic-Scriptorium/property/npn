@@ -1,0 +1,15 @@
+MATCH (N:Word)
+MATCH (N2:Word)
+MATCH (P:Word)
+MATCH (N)-[:DEPREL]->(N2)
+MATCH (N2)-[:DEPREL {deprel: 'case'}]->(P)
+MATCH (N)-[:SENTENCE_SUCCESSOR]->(P)
+MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+WHERE N.xpos =~"N.*"
+AND N2.xpos =~"N.*"
+AND N.lemma = N2.lemma
+AND NOT EXISTS {
+    MATCH (N)-[:DEPREL {deprel: 'case'}]->(P2)
+    MATCH (P2)-[:SENTENCE_SUCCESSOR]->*(N)
+}
+RETURN N, N2, P

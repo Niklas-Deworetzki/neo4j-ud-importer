@@ -55,7 +55,7 @@ def encode_corpus(treebank_root, encode_as_properties):
 	subprocess.run(['wc', '-l'] + glob.glob(f'{treebank_root}/*.conllu'), check=True)
 
 	# Make directory for corpus data.
-	tag = 'property' if encode_as_properties else 'lexicon'
+	tag = 'property' if encode_as_properties else 'node'
 	neo4j_root = f'{DATA_DIR}/{treebank_name}/{tag}'
 	os.makedirs(neo4j_root)
 
