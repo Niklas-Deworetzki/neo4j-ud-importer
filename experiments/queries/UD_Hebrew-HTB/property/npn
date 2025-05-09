@@ -4,8 +4,8 @@ MATCH (P:Word)
 MATCH (N1 {upos: 'NOUN'})
 MATCH (N2 {upos: 'NOUN'})
 MATCH (P {upos: 'ADP'})
-MATCH (N1)-[:SENTENCE_SUCCESSOR]->(P)
-MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+MATCH (N1)-[:SUCCESSOR]->(P)
+MATCH (P)-[:SUCCESSOR]->(N2)
 WHERE N1.form = N2.form
 AND P.form <> "של"
 AND NOT EXISTS {

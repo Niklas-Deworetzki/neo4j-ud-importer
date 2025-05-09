@@ -1,6 +1,6 @@
 MATCH (F:Word)
 MATCH (W:Word)
 MATCH (F {lemma: '?', upos: 'PUNCT'})
-MATCH (W)-[:SENTENCE_SUCCESSOR]->+(F)
+MATCH (W)-[:SUCCESSOR]->+(F)
 WHERE W.PronType in ["Int,Rel", "Int"]
 RETURN F, W

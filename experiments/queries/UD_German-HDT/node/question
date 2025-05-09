@@ -3,6 +3,6 @@ MATCH (W:Word)
 MATCH (W)-[:PRON_TYPE]->(Wpron:PronType)
 MATCH (F)-[:LEMMA]->(:Lemma {value: '?'})
 MATCH (F)-[:UPOS]->(:Upos {value: 'PUNCT'})
-MATCH (W)-[:SENTENCE_SUCCESSOR]->+(F)
+MATCH (W)-[:SUCCESSOR]->+(F)
 WHERE Wpron.value in ["Int,Rel", "Int"]
 RETURN F, W

@@ -4,10 +4,10 @@ MATCH (N2:Word)
 MATCH (N1 {upos: 'NOUN'})
 MATCH (P {upos: 'ADP'})
 MATCH (N2 {upos: 'NOUN'})
-MATCH (N1)-[:SENTENCE_SUCCESSOR]->(P)
-MATCH (P)-[:SENTENCE_SUCCESSOR]->(N2)
+MATCH (N1)-[:SUCCESSOR]->(P)
+MATCH (P)-[:SUCCESSOR]->(N2)
 WHERE N1.form = N2.form
 AND NOT EXISTS {
-    MATCH (A:Word {upos: 'ADP'})-[:SENTENCE_SUCCESSOR]->(N1)
+    MATCH (A:Word {upos: 'ADP'})-[:SUCCESSOR]->(N1)
 }
 RETURN N1, N2, P

@@ -8,6 +8,6 @@ WHERE ilemma.value IN ["אם", "אילו", "לו"]
 AND NOT EXISTS {
     MATCH (KI:Word)
     MATCH (KI)-[:LEMMA]->(:Lemma {value: "כי"})
-    MATCH (I)-[:SENTENCE_SUCCESSOR]->(KI)
+    MATCH (I)-[:SUCCESSOR]->(KI)
 }
 RETURN I, MAIN, COND
