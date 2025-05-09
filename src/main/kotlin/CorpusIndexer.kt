@@ -70,7 +70,7 @@ class CorpusIndexer : Closeable {
             .runWithProgressInformation("Importing relationships between words...")
 
         processor.processTask(AdditionalRelationshipsImporterTask(statistics))
-            .runWithProgressInformation("Adding metadata to regions...")
+            .runWithProgressInformation("Adding additional relationships...")
 
         print("\nFinished in %.1fs", (System.currentTimeMillis() - startTime) / 1000.0)
     }

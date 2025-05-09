@@ -1,10 +1,10 @@
 package se.gu.conll_u
 
 import se.gu.application.Configuration
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_DOCUMENT
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_MWT
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_PARAGRAPH
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_SENTENCE
+import se.gu.corpus.Encoding.CONLLU_REGION_DOCUMENT
+import se.gu.corpus.Encoding.CONLLU_REGION_MWT
+import se.gu.corpus.Encoding.CONLLU_REGION_PARAGRAPH
+import se.gu.corpus.Encoding.CONLLU_REGION_SENTENCE
 import se.gu.processor.CorpusTask
 import se.gu.processor.Processor
 import java.io.File

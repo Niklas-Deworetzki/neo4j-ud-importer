@@ -1,10 +1,10 @@
 package corpus.regions
 
+import se.gu.corpus.Encoding.REGION_LEFT_BOUND_PROPERTY
+import se.gu.corpus.Encoding.REGION_RIGHT_BOUND_PROPERTY
 import se.gu.neo4j.Constraint
 import se.gu.neo4j.DatabaseConnection
 import se.gu.neo4j.NamingConventions
-import se.gu.neo4j.NamingConventions.REGION_LEFT_BOUND_PROPERTY
-import se.gu.neo4j.NamingConventions.REGION_RIGHT_BOUND_PROPERTY
 import java.io.Closeable
 
 class RegionBuilder(private val connection: DatabaseConnection) : Closeable {

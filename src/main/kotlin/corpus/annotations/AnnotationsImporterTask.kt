@@ -2,12 +2,12 @@ package se.gu.corpus.annotations
 
 import corpus.prepare.CorpusStatistics
 import se.gu.corpus.Encoding
+import se.gu.corpus.Encoding.INVENTORY_PROPERTY
+import se.gu.corpus.Encoding.POSITION_PROPERTY
+import se.gu.corpus.Encoding.REGION_LEFT_BOUND_PROPERTY
+import se.gu.corpus.Encoding.WORD_NODE_LABEL
 import se.gu.neo4j.BufferedQuery
 import se.gu.neo4j.NamingConventions
-import se.gu.neo4j.NamingConventions.INVENTORY_PROPERTY
-import se.gu.neo4j.NamingConventions.POSITION_PROPERTY
-import se.gu.neo4j.NamingConventions.REGION_LEFT_BOUND_PROPERTY
-import se.gu.neo4j.NamingConventions.WORD_NODE_LABEL
 import se.gu.processor.Annotations
 import se.gu.processor.CorpusTask
 
@@ -27,11 +27,14 @@ class AnnotationsImporterTask(statistics: CorpusStatistics) : CorpusTask<Unit>(s
     private val persistOnRegionAsPropertyQueries = mutableMapOf<String, DelayedQuery>()
     private val inventories = mutableMapOf<String, Inventory>()
 
+    private lateinit var includedRegions: Set<String>
+
     override fun processWord(annotations: Annotations) {
         val annotationData = mutableMapOf<String, Any?>()
 
         for (stringValueAttribute in Encoding.COLUMNS_ENCODING_STRING) {
-            annotationData[stringValueAttribute] = annotations.getString(stringValueAttribute)
+            val attributeKey = NamingConventions.toPropertyName(stringValueAttribute)
+            annotationData[attributeKey] = annotations.getString(stringValueAttribute)
         }
 
         for (mapValueAttribute in Encoding.COLUMNS_ENCODING_MAP) {
@@ -50,6 +53,10 @@ class AnnotationsImporterTask(statistics: CorpusStatistics) : CorpusTask<Unit>(s
 
 
     override fun enterRegion(region: String, annotations: Annotations) {
+        if (region !in includedRegions) {
+            return
+        }
+
         val inventoryAnnotations = mutableMapOf<String, Any?>()
         val propertyAnnotations = mutableMapOf<String, Any?>()
 
@@ -93,6 +100,8 @@ class AnnotationsImporterTask(statistics: CorpusStatistics) : CorpusTask<Unit>(s
     }
 
     override fun setup() {
+        includedRegions = Encoding.includedRegions(configuration)
+
         val wordPropertyQuery = managedQuery(
             """
             UNWIND ${'$'}batch AS annotation

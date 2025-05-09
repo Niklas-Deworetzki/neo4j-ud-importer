@@ -1,9 +1,9 @@
 package se.gu.corpus.annotations
 
+import se.gu.corpus.Encoding.INVENTORY_PROPERTY
 import se.gu.neo4j.Constraint
 import se.gu.neo4j.DatabaseConnection
 import se.gu.neo4j.NamingConventions
-import se.gu.neo4j.NamingConventions.INVENTORY_PROPERTY
 import java.io.Closeable
 
 class InventoryBuilder(private val connection: DatabaseConnection) : Closeable {

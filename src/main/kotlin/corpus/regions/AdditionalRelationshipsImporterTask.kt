@@ -1,10 +1,10 @@
 package corpus.regions
 
 import corpus.prepare.CorpusStatistics
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_DOCUMENT
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_MWT
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_PARAGRAPH
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_SENTENCE
+import se.gu.corpus.Encoding.CONLLU_REGION_DOCUMENT
+import se.gu.corpus.Encoding.CONLLU_REGION_MWT
+import se.gu.corpus.Encoding.CONLLU_REGION_PARAGRAPH
+import se.gu.corpus.Encoding.CONLLU_REGION_SENTENCE
 import se.gu.processor.Progress
 import se.gu.processor.Task
 
@@ -38,7 +38,6 @@ class AdditionalRelationshipsImporterTask(private val statistics: CorpusStatisti
             tasks.add(Relationship.MembershipToRegion(statistics, CONLLU_REGION_MWT))
         }
 
-
         this.relationships.addAll(tasks)
     }
 
@@ -48,7 +47,6 @@ class AdditionalRelationshipsImporterTask(private val statistics: CorpusStatisti
                 relationship.producerQuery,
                 relationship.consumerQuery
             )
-            completedUnitsOfWork += relationship.unitsOfWork
         }
     }
 

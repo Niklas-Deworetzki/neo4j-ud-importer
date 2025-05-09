@@ -1,16 +1,16 @@
 package corpus.regions
 
 import corpus.prepare.CorpusStatistics
+import se.gu.corpus.Encoding.CONLLU_REGION_SENTENCE
+import se.gu.corpus.Encoding.DEPENDENCY_RELATION_PROPERTY
+import se.gu.corpus.Encoding.DEPENDENCY_RELATION_TYPE
+import se.gu.corpus.Encoding.POSITION_PROPERTY
+import se.gu.corpus.Encoding.REGION_LEFT_BOUND_PROPERTY
+import se.gu.corpus.Encoding.REGION_RIGHT_BOUND_PROPERTY
+import se.gu.corpus.Encoding.ROOT_NODE_LABEL
+import se.gu.corpus.Encoding.SUCCESSOR_RELATIONSHIP_TYPE
+import se.gu.corpus.Encoding.WORD_NODE_LABEL
 import se.gu.neo4j.NamingConventions
-import se.gu.neo4j.NamingConventions.CONLLU_REGION_SENTENCE
-import se.gu.neo4j.NamingConventions.DEPENDENCY_RELATION_PROPERTY
-import se.gu.neo4j.NamingConventions.DEPENDENCY_RELATION_TYPE
-import se.gu.neo4j.NamingConventions.POSITION_PROPERTY
-import se.gu.neo4j.NamingConventions.ROOT_NODE_LABEL
-import se.gu.neo4j.NamingConventions.REGION_LEFT_BOUND_PROPERTY
-import se.gu.neo4j.NamingConventions.REGION_RIGHT_BOUND_PROPERTY
-import se.gu.neo4j.NamingConventions.SUCCESSOR_RELATIONSHIP_TYPE
-import se.gu.neo4j.NamingConventions.WORD_NODE_LABEL
 
 interface Relationship {
     val unitsOfWork: Long

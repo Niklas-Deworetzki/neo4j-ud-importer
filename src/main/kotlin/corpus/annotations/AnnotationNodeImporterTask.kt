@@ -8,12 +8,14 @@ import se.gu.processor.CorpusTask
 class AnnotationNodeImporterTask(statistics: CorpusStatistics) : CorpusTask<Unit>(statistics) {
     private lateinit var inventoryBuilder: InventoryBuilder
 
+    private lateinit var includedRegions: Set<String>
     private lateinit var ignoredRegionAttributes: Set<String>
 
     override fun getValue(): Unit = Unit
 
     override fun setup() {
         this.inventoryBuilder = InventoryBuilder(configuration.databaseConnection)
+        this.includedRegions = Encoding.includedRegions(configuration)
         this.ignoredRegionAttributes =
             if (configuration.annotationOptions.asNodes) emptySet()
             else Encoding.REGION_ANNOTATIONS_STORED_AS_PROPERTY
@@ -38,6 +40,10 @@ class AnnotationNodeImporterTask(statistics: CorpusStatistics) : CorpusTask<Unit
     }
 
     override fun enterRegion(region: String, annotations: Annotations) {
+        if (region !in includedRegions) {
+            return
+        }
+
         for (attribute in annotations.keys()) {
             if (attribute !in ignoredRegionAttributes) {
                 val value = annotations.getString(attribute)!!
