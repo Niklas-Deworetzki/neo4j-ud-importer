@@ -1,12 +1,12 @@
 MATCH (N1:Word)
 MATCH (N2:Word)
 MATCH (P:Word)
-MATCH (N1 {UPOS: 'NOUN'})
-MATCH (P {UPOS: 'ADP'})
-MATCH (N2 {UPOS: 'NOUN'})
+MATCH (N1 {upos: 'NOUN'})
+MATCH (P {upos: 'ADP'})
+MATCH (N2 {upos: 'NOUN'})
 MATCH (N1)-[:SUCCESSOR]->(P)
 MATCH (P)-[:SUCCESSOR]->(N2)
-WHERE N1.LEMMA = N2.LEMMA
+WHERE N1.lemma = N2.lemma
 AND NOT EXISTS {
     MATCH (X:Word)
     MATCH (N1)-[:DEPREL {deprel: 'case'}]->(X)

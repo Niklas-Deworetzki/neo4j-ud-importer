@@ -3,6 +3,6 @@ MATCH (X:Word)
 MATCH (H:Word)
 MATCH (X)-[:DEPREL {deprel: "mark"}]->(A)
 MATCH (H)-[r:DEPREL]->(X)
-WHERE A.LEMMA IN ["om", "ifall"]
+WHERE A.lemma IN ["om", "ifall"]
 AND r.deprel IN ["advcl", "advmod"]
 RETURN A, X, H
