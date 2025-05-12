@@ -92,8 +92,8 @@ def measure_runtime(executor, queries, warmup, repetitions, output):
 		iterate_queries(queries, repetitions, f'Measuring', time_query, write_row)
 
 
-WARMUP_RUNS = 1
-MEASUREMENT_RUNS = 1
+WARMUP_RUNS = 10
+MEASUREMENT_RUNS = 100
 
 def main():
 	random.seed(59287)
@@ -105,7 +105,7 @@ def main():
 	global logfile
 	logfile = open(f'{result_dir}/query.log', 'w')
 
-	grew_data_dir = path.abspath('grew_data')
+	grew_data_dir = path.abspath('grew-data')
 
 	total_score = len(CORPORA) * 3
 	with tqdm(desc='Overall progress', total = total_score, position=0) as pbar:
