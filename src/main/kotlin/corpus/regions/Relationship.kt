@@ -58,20 +58,20 @@ interface Relationship {
         """
     }
 
-    class ParentRegion(corpusStatistics: CorpusStatistics, region: String, parent: String) :
+    class ParentRegionViaMembership(corpusStatistics: CorpusStatistics, region: String, parent: String) :
         Relationship {
         private val regionNodeLabel = NamingConventions.toNodeLabel(region)
         private val parentNodeLabel = NamingConventions.toNodeLabel(parent)
+
         private val relationshipType = NamingConventions.toRelationshipType(parent)
 
         override val unitsOfWork: Long =
             corpusStatistics.occurrencesOfRegion(region)
 
         override val producerQuery: String = """
-            MATCH (parent:`$parentNodeLabel`)
             MATCH (region:`$regionNodeLabel`)
-            WHERE parent.`$REGION_LEFT_BOUND_PROPERTY` <= region.`$REGION_LEFT_BOUND_PROPERTY` AND
-            region.`$REGION_RIGHT_BOUND_PROPERTY` >= parent.`$REGION_RIGHT_BOUND_PROPERTY`
+            MATCH (word:`$WORD_NODE_LABEL` {position: region.`$REGION_LEFT_BOUND_PROPERTY`})
+            MATCH (parent:`$parentNodeLabel`)<-[:`$relationshipType`]-(word)
             RETURN region, parent
         """
 
@@ -88,13 +88,13 @@ interface Relationship {
             corpusStatistics.wordsCoveredByRegion(region)
 
         override val producerQuery: String = """
-            EXPLAIN MATCH (region:`$regionNodeLabel`)
+            MATCH (region:`$regionNodeLabel`)
             UNWIND range(region.`$REGION_LEFT_BOUND_PROPERTY`, region.`$REGION_RIGHT_BOUND_PROPERTY`) AS position
             MATCH (word:`$WORD_NODE_LABEL` {`$POSITION_PROPERTY`: position})
-            RETURN region, position
+            RETURN region, word
         """
         override val consumerQuery: String = """
-            CREATE (word)<-[:`$relationshipType`]-(region)
+            CREATE (word)-[:`$relationshipType`]->(region)
         """
     }
 }

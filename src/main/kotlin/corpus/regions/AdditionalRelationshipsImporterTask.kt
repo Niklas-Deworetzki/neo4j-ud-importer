@@ -13,7 +13,7 @@ class AdditionalRelationshipsImporterTask(private val statistics: CorpusStatisti
     private val relationships = mutableListOf<Relationship>()
 
     private val totalUnitsOfWork: Long
-        get() = relationships.sumOf { it.unitsOfWork }
+        get() = 1 + relationships.sumOf { it.unitsOfWork }
     private var completedUnitsOfWork: Long = 0L
 
     override val progress: Progress
@@ -23,16 +23,35 @@ class AdditionalRelationshipsImporterTask(private val statistics: CorpusStatisti
         val tasks = mutableListOf<Relationship>()
         tasks.add(Relationship.Successor(statistics))
         tasks.add(Relationship.Root(statistics))
+        tasks.add(Relationship.MembershipToRegion(statistics, CONLLU_REGION_SENTENCE))
 
         if (configuration.encodingOptions.encodeParagraphs) {
-            tasks.add(Relationship.ParentRegion(statistics, CONLLU_REGION_SENTENCE, CONLLU_REGION_PARAGRAPH))
+            tasks.add(
+                Relationship.MembershipToRegion(statistics, CONLLU_REGION_PARAGRAPH)
+            )
+            tasks.add(
+                Relationship.ParentRegionViaMembership(
+                    statistics,
+                    CONLLU_REGION_SENTENCE,
+                    CONLLU_REGION_PARAGRAPH
+                )
+            )
         }
         if (configuration.encodingOptions.encodeDocuments) {
-            if (configuration.encodingOptions.encodeParagraphs) {
-                tasks.add(Relationship.ParentRegion(statistics, CONLLU_REGION_PARAGRAPH, CONLLU_REGION_DOCUMENT))
-            } else {
-                tasks.add(Relationship.ParentRegion(statistics, CONLLU_REGION_SENTENCE, CONLLU_REGION_DOCUMENT))
-            }
+            tasks.add(
+                Relationship.MembershipToRegion(statistics, CONLLU_REGION_DOCUMENT)
+            )
+
+            val lowerLevel =
+                if (configuration.encodingOptions.encodeParagraphs) CONLLU_REGION_PARAGRAPH
+                else CONLLU_REGION_SENTENCE
+            tasks.add(
+                Relationship.ParentRegionViaMembership(
+                    statistics,
+                    lowerLevel,
+                    CONLLU_REGION_DOCUMENT
+                )
+            )
         }
         if (configuration.encodingOptions.encodeMwts) {
             tasks.add(Relationship.MembershipToRegion(statistics, CONLLU_REGION_MWT))
@@ -42,11 +61,13 @@ class AdditionalRelationshipsImporterTask(private val statistics: CorpusStatisti
     }
 
     override fun performComputation() {
+        completedUnitsOfWork += 1 // Update progress bar, even if it takes longer.
         for (relationship in relationships) {
             configuration.databaseConnection.executeIteratedQuery(
                 relationship.producerQuery,
                 relationship.consumerQuery
             )
+            completedUnitsOfWork += relationship.unitsOfWork
         }
     }
 

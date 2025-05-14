@@ -104,17 +104,17 @@ class Configuration {
             names = ["--encode-documents"],
             required = false,
             negatable = true,
-            description = ["Choose to encode documents as additional nodes. Disabled by default."]
+            description = ["Choose to encode documents as additional nodes. Enabled by default."]
         )
-        var encodeDocuments: Boolean = false
+        var encodeDocuments: Boolean = true
 
         @CommandLine.Option(
             names = ["--encode-paragraphs"],
             required = false,
             negatable = true,
-            description = ["Choose to encode paragraphs as additional nodes. Disabled by default."]
+            description = ["Choose to encode paragraphs as additional nodes. Enabled by default."]
         )
-        var encodeParagraphs: Boolean = false
+        var encodeParagraphs: Boolean = true
 
         @CommandLine.Option(
             names = ["--encode-mwt"],
