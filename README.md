@@ -25,10 +25,20 @@ So if you're running your instance locally, you can omit these options completel
 
 ## Building
 
+This project is configured and built via [Gradle](https://gradle.org/install/).
+To build the project, it suffices to run the following command in this root directory.
+Afterwards you will find an executable `.jar` file under the `build/libs` directory.
+
+```bash
+./gradlew jar
+```
+
+You will find the source code for the importer tool in [the source code directory](src/main/kotlin).
 
 ## Running Experiments
 
-
+If you want to run the experiments presented in our paper or try your own experiments, feel free to read the instructions in the [experiments directory](experiments).
+You will be required to build this project or download the current published executable.
 
 ## Running Neo4j in Docker
 
@@ -50,12 +60,12 @@ docker run --rm  \
 
 <details>
   <summary>Click here to see what the command does</summary>
-  This command creates and runs a new docker container with the `neo4j:latest` image.
-  After the command termintes (done by pressing Ctrl-C), the container will be removed from Docker, but its data will be persisted.
-  The different `--mount` flags tell Docker, how to map directories from your filesystem into the container.
-  This is done to persist data.
-  The different `--publish` flags make the database instance accessible on your machine.
-  And finally, the `--env` flags configure the database to have (1) no authorization, (2) enable the *apoc* plugins and (3) create optimized access for functions within the *apoc* plugins.
+  This command creates and runs a new docker container with the <code>neo4j:latest</code> image.<br/>
+  After the command termintes (done by pressing Ctrl-C), the container will be removed from Docker, but its data will be persisted.<br/>
+  The different <code>--mount</code> flags tell Docker, how to map directories from your filesystem into the container.
+  This is done to persist data.<br/>
+  The different <code>--publish</code> flags make the database instance accessible on your machine.<br/>
+  And finally, the <code>--env</code> flags configure the database to have (1) no authorization, (2) enable the <emph>apoc</emph> plugins and (3) create optimized access for functions within the <em>apoc</em> plugins.
   These plugins are interacted with by the Neo4Corpus tool to make importing your corpus faster.
 </details>
 
